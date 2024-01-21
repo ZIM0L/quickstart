@@ -118,11 +118,11 @@ void main() {
    boolToText();
    addTable();
 
-  if (isPaused) {
     Timer.periodic(Duration(seconds:2), (timer) {
+  if (isPaused) {
       updateCellText();
       // print('Wykonuję co 4 sekundy!');
-    });
   }
+    });
     
   }
