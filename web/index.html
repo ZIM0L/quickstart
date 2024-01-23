@@ -6,17 +6,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="scaffolded-by" content="https://github.com/dart-lang/sdk">
-    <title>quickstart</title>
+    <title>dart</title>
     <link rel="stylesheet" href="styles.css">
     <script defer src="main.dart.js"></script>
 </head>
 
 <body>
 
-  <div id="output"></div>
+  <div>
+    <p>
+      Gra w życie (ang. Conway's Game of Life) to automat komórkowy stworzony przez matematyka Johna Conwaya. Gra ta jest przykładem automatu komórkowego, co oznacza, że jej stan zmienia się na podstawie określonych zasad w zależności od aktualnego stanu.
+
+    </p>
+
+    Zasady gry w życie są dość proste:
+    <ul>
+      <li>
+          Komórki są rozmieszczone na dwuwymiarowej planszy
+        </li>
+        <li>
+          Każda komórka może być w jednym z dwóch stanów: żywa lub martwa.
+        </li>
+        <li>
+          Stan kolejnej generacji zależy od liczby żywych sąsiadów danej komórki.
+        </li>
+        <li>
+          Jeśli komórka jest żywa i ma mniej niż dwóch żywych sąsiadów, umiera z samotności.
+        </li>
+        <li>
+          Jeśli komórka jest żywa i ma więcej niż trzech żywych sąsiadów, umiera z przeludnienia.
+        </li>
+        <li>
+          Jeśli komórka jest żywa i ma dwóch lub trzech żywych sąsiadów, przetrwa.
+        </li>
+        <li>
+          Jeśli komórka jest martwa i ma dokładnie trzech żywych sąsiadów, ożywa.
+        </li>
+    </ul>
+
+  </div>
+  <div id="output">Game is Paused</div>
   <div id="gameDiv"></div>
-  <div id="startGame">start</div>
-  <div id="endGame">end</div>
-  
+  <button id="startGame">start</button>
+  <button id="endGame">stop</button>
+  <Label>xAxis size:</Label>
+  <input type="number" value="0" id="newRow" class="inputAxis">
+  <Label>yAxis size:</Label>
+  <input type="number" value="0" id="newCol" class="inputAxis">
+  <button id="resizeBtn"> Resize</button>  
+  <button id="resetBtn"> Reset</button>  
 </body>
 </html>

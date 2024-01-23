@@ -17,4 +17,8 @@ html, body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  font-size: large;
+}
+td{
+  padding: 0 0;
 }
