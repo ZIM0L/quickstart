@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'dart:async';
+import 'Canvas.dart';
 
 void main() {
   var isPaused = false;
@@ -159,4 +160,5 @@ void main() {
       // print('Wykonuję co 4 sekundy!');
     }
   });
+  drawChart();
 }

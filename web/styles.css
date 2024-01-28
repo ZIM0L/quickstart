@@ -22,3 +22,11 @@ html, body {
 td{
   padding: 0 0;
 }
+#containerForCanvas{
+  text-align: center;
+  height: 50vh;
+  margin-top:20px;
+}
+canvas{
+  border: 1px black solid;
+}
