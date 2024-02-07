@@ -1,63 +1,299 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="scaffolded-by" content="https://github.com/dart-lang/sdk">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="scaffolded-by" content="https://github.com/dart-lang/sdk" />
     <title>dart</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="drone.svg" />
     <script defer src="main.dart.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
+    <div>
+      <p>
+        Gra w życie (ang. Conway's Game of Life) to automat komórkowy stworzony
+        przez matematyka Johna Conwaya. Gra ta jest przykładem automatu
+        komórkowego, co oznacza, że jej stan zmienia się na podstawie
+        określonych zasad w zależności od aktualnego stanu.
+      </p>
 
-  <div>
-    <p>
-      Gra w życie (ang. Conway's Game of Life) to automat komórkowy stworzony przez matematyka Johna Conwaya. Gra ta jest przykładem automatu komórkowego, co oznacza, że jej stan zmienia się na podstawie określonych zasad w zależności od aktualnego stanu.
-
-    </p>
-
-    Zasady gry w życie są dość proste:
-    <ul>
-      <li>
-          Komórki są rozmieszczone na dwuwymiarowej planszy
-        </li>
+      Zasady gry w życie są dość proste:
+      <ul>
+        <li>Komórki są rozmieszczone na dwuwymiarowej planszy</li>
         <li>
           Każda komórka może być w jednym z dwóch stanów: żywa lub martwa.
         </li>
         <li>
-          Stan kolejnej generacji zależy od liczby żywych sąsiadów danej komórki.
+          Stan kolejnej generacji zależy od liczby żywych sąsiadów danej
+          komórki.
         </li>
         <li>
-          Jeśli komórka jest żywa i ma mniej niż dwóch żywych sąsiadów, umiera z samotności.
+          Jeśli komórka jest żywa i ma mniej niż dwóch żywych sąsiadów, umiera z
+          samotności.
         </li>
         <li>
-          Jeśli komórka jest żywa i ma więcej niż trzech żywych sąsiadów, umiera z przeludnienia.
+          Jeśli komórka jest żywa i ma więcej niż trzech żywych sąsiadów, umiera
+          z przeludnienia.
         </li>
         <li>
-          Jeśli komórka jest żywa i ma dwóch lub trzech żywych sąsiadów, przetrwa.
+          Jeśli komórka jest żywa i ma dwóch lub trzech żywych sąsiadów,
+          przetrwa.
         </li>
         <li>
-          Jeśli komórka jest martwa i ma dokładnie trzech żywych sąsiadów, ożywa.
+          Jeśli komórka jest martwa i ma dokładnie trzech żywych sąsiadów,
+          ożywa.
         </li>
-    </ul>
+      </ul>
+    </div>
+    <div id="output">Game is Paused</div>
+    <div id="gameDiv"></div>
+    <div>
+      <button id="startGame">start</button>
+      <button id="endGame">stop</button>
+      <label>xAxis size:</label>
+      <input type="number" value="0" id="newRow" class="inputAxis" />
+      <label>yAxis size:</label>
+      <input type="number" value="0" id="newCol" class="inputAxis" />
+      <button id="resizeBtn">Resize</button>
+      <button id="resetBtn">Reset</button>
+    </div>
+    <h1>Canvas</h1>
+    <button id="startCanvas">Toggle</button>
+    <div id="containerForCanvas"></div>
+    <h1>SVG</h1>
+    <div id="svg-panel">
+      <svg viewBox="0 0 1000 1000" width="800" height="600" class="svg-class">
+        <!-- Słońce -->
 
-  </div>
-  <div id="output">Game is Paused</div>
-  <div id="gameDiv"></div>
-  <div>
-    <button id="startGame">start</button>
-    <button id="endGame">stop</button>
-    <Label>xAxis size:</Label>
-    <input type="number" value="0" id="newRow" class="inputAxis">
-    <Label>yAxis size:</Label>
-    <input type="number" value="0" id="newCol" class="inputAxis">
-    <button id="resizeBtn"> Resize</button>  
-    <button id="resetBtn"> Reset</button>  
-  </div>
-  <div id="containerForCanvas">
-  </div>
-</body>
+        <circle cx="500" cy="500" r="500" fill="#2b3040" />
+        <circle cx="500" cy="500" r="40" fill="yellow" />
+
+        <!-- Orbita Merkurego -->
+        <circle cx="500" cy="500" r="60" stroke="gray" fill="none" />
+        <!-- Merkury -->
+        <circle id="mercury" cx="340" cy="500" r="5" fill="#996633" />
+
+        <!-- Orbita Wenus -->
+        <circle cx="500" cy="500" r="100" stroke="gray" fill="none" />
+        <!-- Wenus -->
+        <circle id="venus" cx="500" cy="500" r="8" fill="#FFA500" />
+
+        <!-- Orbita Ziemi -->
+        <circle cx="500" cy="500" r="140" stroke="gray" fill="none" />
+        <!-- Ziemia -->
+        <circle id="earth" cx="500" cy="500" r="10" fill="#0000FF" />
+        <circle
+          id="moon"
+          cx="500"
+          cy="500"
+          r="5"
+          stroke="gray"
+          fill="#aaaaaa"
+        />
+
+        <!-- Orbita Marsa -->
+        <circle cx="500" cy="500" r="180" stroke="gray" fill="none" />
+        <!-- Mars -->
+        <circle id="mars" cx="500" cy="500" r="8" fill="#FF4500" />
+
+        <!-- Orbita Jowisza -->
+        <circle cx="500" cy="500" r="250" stroke="gray" fill="none" />
+        <!-- Jowisz -->
+        <circle id="jupiter" cx="500" cy="500" r="20" fill="#FF6347" />
+
+        <!-- Orbita Saturna -->
+        <circle cx="500" cy="500" r="320" stroke="gray" fill="none" />
+        <!-- Saturn -->
+        <circle id="saturn" cx="500" cy="500" r="18" fill="#DAA520" />
+
+        <!-- Orbita Urana -->
+        <circle cx="500" cy="500" r="390" stroke="gray" fill="none" />
+        <!-- Uran -->
+        <circle id="uranus" cx="500" cy="500" r="15" fill="#4682B4" />
+
+        <!-- Orbita Neptuna -->
+        <circle cx="500" cy="500" r="450" stroke="gray" fill="none" />
+        <!-- Neptun -->
+        <circle id="neptune" cx="500" cy="500" r="14" fill="#000080" />
+      </svg>
+      <svg
+        width="800"
+        height="526"
+        viewBox="0 0 1100 526"
+        fill="none"
+        class="svg-class"
+      >
+        <rect width="800" height="526" fill="#ffffff" />
+        <g id="undraw_undraw_flying_drone_u3r2_-3-_egfy 1" ">
+        <g id="Group">
+          <path
+            id="uuid-9355c850-1a87-4a07-99bb-80cbbe234fdd-95-608"
+            d="M456.393 305.046C465.391 300.968 474.333 303.591 476.365 310.902C478.397 318.214 472.749 327.445 463.747 331.522C460.169 333.214 456.325 333.787 452.537 333.194L414.24 349.856L408.498 326.744L446.863 312.772C449.511 309.262 452.779 306.612 456.393 305.046Z"
+            fill="#FFB4B4"
+          />
+          <path
+            id="Vector"
+            d="M442.461 339.65L366.876 384.417L366.687 384.53L305.23 336.62C299.555 332.195 296.105 324.485 296.002 315.994C295.9 307.504 299.163 299.662 304.731 295.018C311.706 289.199 320.77 289.743 327.286 296.372L372.601 342.471L436.822 312.366L442.461 339.65Z"
+            fill="#E4E4E4"
+          />
+        </g>
+        <path
+          id="Vector_2"
+          d="M0 485.795C0 486.455 0.53003 486.985 1.19006 486.985H787.48C788.14 486.985 788.67 486.455 788.67 485.795C788.67 485.135 788.14 484.605 787.48 484.605H1.19006C0.53003 484.605 0 485.135 0 485.795Z"
+          fill="#3F3D56"
+        />
+        <g id="Group_2">
+          <path
+            id="Vector_3"
+            d="M307.08 304.47L331.081 271.315L300.145 235.755L266.664 287.668L307.08 304.47Z"
+            fill="#FFB4B4"
+          />
+        </g>
+        <g id="Group_3">
+          <path
+            id="Vector_5"
+            d="M253.837 517.84C256.747 519.12 259.857 520.34 263.197 521.5C313.067 538.79 370.887 500.81 404.047 473.43C420.757 459.62 431.197 448.5 431.197 448.5L463.917 464.86L485.707 475.75H485.717L489.947 477.88C489.957 477.88 489.967 477.89 489.967 477.89L502.857 484.33L522.797 494.3L525.197 495.5L526.837 495.98L556.197 504.5L562.197 483.5C562.197 483.5 560.147 481.67 556.557 478.5C534.697 459.24 455.807 390.65 435.197 385.5C425.847 383.16 405.897 390.83 385.007 401.07C352.247 417.13 317.197 439.5 317.197 439.5L303.197 419.5L254.997 430.38L236.707 434.51L225.697 437C225.697 437 191.457 490.41 253.837 517.84Z"
+            fill="#2F2E41"
+          />
+          <path
+            id="Vector_6"
+            d="M554.197 480.5C554.197 480.5 561.197 473.5 565.197 476.5C569.197 479.5 573.197 483.5 573.197 483.5C573.197 483.5 604.197 485.5 605.197 500.5C606.197 515.5 584.197 520.5 584.197 520.5C584.197 520.5 512.197 526.5 512.197 516.5C512.197 506.5 522.799 494.301 522.799 494.301C522.799 494.301 557.197 488.5 554.197 480.5Z"
+            fill="#201F29"
+          />
+        </g>
+        <g id="Group_4">
+          <path
+            id="Vector_7"
+            d="M253.837 517.84C307.637 498.07 354.197 448.5 354.197 448.5L404.047 473.43L445.797 494.3L448.197 495.5L479.197 504.5L485.197 483.5C485.197 483.5 483.147 481.67 479.557 478.5C475.817 475.21 470.407 470.47 463.917 464.86C442.577 446.42 409.457 418.49 385.007 401.07C352.247 417.13 317.197 439.5 317.197 439.5L303.197 419.5L254.997 430.38C245.957 435.82 240.197 439.5 240.197 439.5L236.707 434.51L225.697 437C225.697 437 191.457 490.41 253.837 517.84Z"
+            fill="#2F2E41"
+          />
+          <path
+            id="Vector_8"
+            d="M477.197 480.5C477.197 480.5 484.197 473.5 488.197 476.5C492.197 479.5 496.197 483.5 496.197 483.5C496.197 483.5 527.197 485.5 528.197 500.5C529.197 515.5 507.197 520.5 507.197 520.5C507.197 520.5 435.197 526.5 435.197 516.5C435.197 506.5 445.799 494.301 445.799 494.301C445.799 494.301 480.197 488.5 477.197 480.5Z"
+            fill="#201F29"
+          />
+        </g>
+        <path
+          id="Vector_9"
+          d="M230.863 360.183C233.022 330.914 244.905 302.676 264.322 280.669L264.513 280.453L315.078 290.566L326.143 323.259C333.194 344.092 331.516 367.28 321.538 386.879L309.219 411.076L313.291 433.474L225.72 437.499L225.157 437.525L230.863 360.183Z"
+          fill="#E4E4E4"
+        />
+        <g id="Group_5">
+          <path
+            id="Vector_10"
+            d="M678.824 90.6008H715.31V91.9764C715.31 101.032 707.958 108.384 698.903 108.384H695.232C686.176 108.384 678.824 101.032 678.824 91.9764V90.6008Z"
+            fill="#3F3D56"
+          />
+          <path
+            id="Vector_11"
+            d="M795.678 70.549L732.725 57.1331L732.398 53.4718C732.374 53.2006 732.337 52.9311 732.294 52.6628L762.067 39.5517C765.133 34.0328 770.345 37.0989 770.345 37.0989C770.345 37.0989 780.463 38.6319 778.317 28.8206C776.171 19.0093 762.373 26.0612 762.373 26.0612L726.201 37.3279L720.29 23.2874C718.47 18.9656 714.238 16.1553 709.549 16.1553H688.506C684.003 16.1553 679.903 18.7491 677.974 22.8179L671.045 37.4375L634.52 26.0612C634.52 26.0612 620.723 19.0093 618.577 28.8206C616.431 38.6319 626.549 37.0989 626.549 37.0989C626.549 37.0989 631.761 34.0328 634.827 39.5517L663.962 52.3817L663.391 53.5853C662.802 54.8282 662.443 56.163 662.319 57.5271L601.216 70.549C596.072 71.6455 593.207 77.1631 595.269 82.0014L596.71 85.3812C598.803 90.2919 604.979 92.1178 609.248 88.9125C610.762 87.775 611.832 86.1169 611.832 83.7024L663.032 71.7826C666.128 85.368 678.283 95.5066 692.806 95.5066H702.767C717.509 95.5066 729.64 85.112 732.609 71.491L785.062 83.7024C785.062 86.1169 786.131 87.775 787.646 88.9125C791.915 92.1178 798.091 90.2919 800.184 85.3812L801.625 82.0014C803.687 77.1631 800.822 71.6455 795.678 70.549Z"
+            fill="#3F3D56"
+          />
+          <g id="Group_Wing_1" class="Wing">
+            <path
+              id="Vector_12"
+              d="M727.618 16.9919L761.691 22.9668C761.691 22.9668 764.723 21.9238 762.874 20.7851C761.026 19.6463 724.539 14.1594 724.539 14.1594L727.618 16.9919Z"
+              fill="#FF63E1"
+            />
+            <path
+              id="Vector_13"
+              d="M766.326 21.7303C766.326 21.7303 768.973 27.1409 774.747 29.4237C780.52 31.7065 810.706 34.1004 810.706 34.1004L814.373 30.5514L779.313 19.4405L768.55 20.3464L766.326 21.7303Z"
+              fill="#FF63E1"
+            />
+          </g>
+          <g id="Group_Wing_2" class="Wing">
+            <path
+              id="Vector_14"
+              d="M789.23 77.5578C789.23 77.5578 784.31 74.0821 778.15 74.8508C771.989 75.6194 744.359 88.0087 744.359 88.0087L742.846 92.8821L778.936 85.8004L787.943 79.8394L789.23 77.5578Z"
+              fill="#FF63E1"
+            />
+            <path
+              id="Vector_15"
+              d="M792.839 74.1237C792.839 74.1237 796.347 79.0209 802.419 80.3156C808.49 81.6102 838.656 78.9696 838.656 78.9696L841.684 74.8621L805.268 69.7138L794.804 72.3905L792.839 74.1237Z"
+              fill="#FF63E1"
+            />
+          </g>
+          <g id="Group_Wing_3" class="Wing">
+            <path
+              id="Vector_16"
+              d="M631.698 17.9442L665.518 10.6724C665.518 10.6724 670.216 12.2677 668.413 13.4762C666.609 14.6848 628.73 20.8922 628.73 20.8922L631.698 17.9442Z"
+              fill="#FF63E1"
+            />
+            <path
+              id="Vector_17"
+              d="M622.106 22.0476C622.106 22.0476 619.178 27.3121 613.293 29.2894C607.408 31.2666 577.138 32.0761 577.138 32.0761L573.663 28.3399L609.256 19.0807L619.957 20.5492L622.106 22.0476Z"
+              fill="#FF63E1"
+            />
+          </g>
+          <g id="Group_Wing_4" class="Wing">
+            <path
+              id="Vector_18"
+              d="M605.987 74.4657C605.987 74.4657 610.928 71.0194 617.083 71.8247C623.239 72.63 650.795 85.1839 650.795 85.1839L652.279 90.0662L616.232 82.7695L607.261 76.7549L605.987 74.4657Z"
+              fill="#FF63E1"
+            />
+            <path
+              id="Vector_19"
+              d="M597.725 74.7264C597.725 74.7264 594.188 79.6026 588.109 80.861C582.029 82.1194 551.88 79.299 551.88 79.299L548.877 75.1735L585.323 70.2424L595.771 72.9814L597.725 74.7264Z"
+              fill="#FF63E1"
+            />
+          </g>
+          <path
+            id="Vector_20"
+            d="M770.805 31.7333C775.546 31.7333 779.39 27.8897 779.39 23.1485C779.39 18.4072 775.546 14.5636 770.805 14.5636C766.064 14.5636 762.22 18.4072 762.22 23.1485C762.22 27.8897 766.064 31.7333 770.805 31.7333Z"
+            fill="#3F3D56"
+          />
+          <path
+            id="Vector_21"
+            d="M625.016 32.4998C629.757 32.4998 633.601 28.6563 633.601 23.915C633.601 19.1737 629.757 15.3301 625.016 15.3301C620.274 15.3301 616.431 19.1737 616.431 23.915C616.431 28.6563 620.274 32.4998 625.016 32.4998Z"
+            fill="#3F3D56"
+          />
+        </g>
+        <g id="Group_6">
+          <path
+            id="Vector_22"
+            d="M448.597 350.74L448 295.521C447.969 292.592 450.313 290.073 453.702 289.395L470.041 286.124C471.645 285.803 473.308 286.111 474.603 286.968C475.897 287.826 476.643 289.113 476.647 290.498L476.843 349.632C476.846 350.631 476.386 351.57 475.547 352.277C474.708 352.985 473.592 353.374 472.404 353.374H451.759C450.031 353.374 448.613 352.193 448.597 350.74Z"
+            fill="#2F2E41"
+          />
+          <path
+            id="Vector_23"
+            d="M454.561 290.557L456.121 290.242V292.227C456.121 292.861 456.81 293.329 457.528 293.182L463.83 291.892C464.748 291.704 465.396 290.998 465.396 290.187V288.369L468.414 287.759C470.543 287.329 472.585 288.712 472.598 290.593L472.986 347.942C473.002 350.309 470.775 352.235 468.022 352.235H452.438C450.737 352.235 449.354 351.057 449.338 349.595L448.738 296.939C448.704 293.903 451.123 291.251 454.561 290.557Z"
+            fill="#FF63E1"
+          />
+        </g>
+        <g id="Group_7">
+          <path
+            id="uuid-f0f0303c-5b59-4c86-93e3-26367f99a071-96-609"
+            d="M444.539 321.534C455.244 315.702 466.93 316.498 470.641 323.311C474.352 330.124 468.681 340.373 457.972 346.206C453.726 348.595 448.969 349.932 444.1 350.106L398.431 374.244L387.56 352.572L433.736 331.076C436.523 327.078 440.228 323.806 444.539 321.534Z"
+            fill="#FFB4B4"
+          />
+          <path
+            id="Vector_24"
+            d="M291.571 343.655C286.187 338.564 283.173 330.484 283.507 322.04C283.841 313.596 287.468 306.208 293.209 302.278C300.401 297.353 309.333 299.006 315.435 306.389L357.866 357.728L422.48 335.845L422.888 335.707L427.066 363.494L349.865 398.772L291.571 343.655Z"
+            fill="#E4E4E4"
+          />
+        </g>
+        <g id="head">
+          <path
+            id="Vector_4"
+            d="M309.604 275.019C331.545 286.107 358.321 277.31 369.409 255.369C380.498 233.428 371.7 206.652 349.759 195.564C327.818 184.475 301.043 193.273 289.954 215.214C278.866 237.155 287.664 263.931 309.604 275.019Z"
+            fill="#FFB4B4"
+          />
+          <path
+            id="Vector_25"
+            d="M365.064 199.133C370.414 208.145 372.385 218.81 369.824 228.871C367.94 236.273 363.557 244.139 354.01 249.113C341.461 255.652 332.404 273.659 326.855 288.278C323.431 297.299 312.648 301.119 304.09 296.353C285.827 286.184 257.181 328.647 240.431 329.282C221.15 330.012 210.371 316.823 210.371 316.823C210.371 316.823 236.538 266.966 253.006 256.448C263.354 249.838 278.256 216.442 285.024 203.427C292.269 189.494 305.496 179.372 321.144 176.698C335.491 174.247 352.326 177.68 365.064 199.133Z"
+            fill="#2F2E41"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_0_1">
+            <rect width="834.732" height="525.852" fill="white" />
+          </clipPath>
+        </defs>
+      </svg>
+    </div>
+  </body>
 </html>
